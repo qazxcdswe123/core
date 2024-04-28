@@ -61,7 +61,7 @@ pub fn debug_write(self : Char, buf : Buffer) -> Unit {
 
 test "debug_write" {
   fn repr(chr) {
-    let buf = Buffer::make(0)
+    let buf = Buffer::make(4)
     debug_write(chr, buf)
     buf.to_string()
   }
@@ -74,6 +74,7 @@ test "debug_write" {
   @assertion.assert_eq(repr('\r'), "'\\r'")?
   @assertion.assert_eq(repr('\b'), "'\\b'")?
   @assertion.assert_eq(repr('\t'), "'\\t'")?
+  @assertion.assert_eq(repr('\x0f'), "'\\x0f'")?
   @assertion.assert_eq(repr(Char::from_int_unchecked(0)), "'\\x00'")?
 }
 
@@ -100,4 +101,18 @@ pub fn Char::from_int(i : Int) -> Option[Char] {
   } else {
     None
   }
+}
+
+test {
+  inspect(Char::from_int_unchecked(0xD800).is_valid(), content="false")?
+  inspect(Char::from_int(0xD800), content="None")?
+}
+
+test {
+  inspect(Char::from_int_unchecked(97), content="a")?
+  inspect('中'.to_int(), content="20013")?
+  inspect(Char::from_int(20013), content="Some(中)")?
+  inspect(Char::from_int_unchecked(20013), content="中")?
+  inspect('🤣'.to_int(), content="129315")?
+  inspect(Char::from_int(129315), content="Some(🤣)")?
 }
