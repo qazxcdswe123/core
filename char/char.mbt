@@ -80,3 +80,24 @@ test "debug_write" {
 pub fn hash(self : Char) -> Int {
   self.to_int()
 }
+
+pub let min : Char = Char::from_int_unchecked(0x0)
+
+pub let max : Char = Char::from_int_unchecked(0x10FFFF)
+
+let lo_bound : Char = Char::from_int_unchecked(0xD7FF)
+
+let hi_bound : Char = Char::from_int_unchecked(0xE000)
+
+pub fn is_valid(self : Char) -> Bool {
+  min <= self && self <= lo_bound || hi_bound <= self && self <= max
+}
+
+pub fn Char::from_int(i : Int) -> Option[Char] {
+  let c = Char::from_int_unchecked(i)
+  if c.is_valid() {
+    Some(c)
+  } else {
+    None
+  }
+}
