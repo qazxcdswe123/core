@@ -67,7 +67,7 @@ fn Byte::to_int(Byte) -> Int
 fn Byte::to_string(Byte) -> String
 fn Char::compare(Char, Char) -> Int
 fn Char::default() -> Char
-fn Char::from_int(Int) -> Char
+fn Char::from_int_unchecked(Int) -> Char
 fn Char::op_equal(Char, Char) -> Bool
 fn Char::to_int(Char) -> Int
 fn Int::asr(Int, Int) -> Int
