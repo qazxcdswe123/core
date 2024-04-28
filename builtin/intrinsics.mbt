@@ -184,7 +184,7 @@ pub fn Double::convert_i64_u(val : Int64) -> Double = "%i64_to_f64_u"
 
 pub fn Char::to_int(self : Char) -> Int = "%char_to_int"
 
-pub fn Char::from_int(val : Int) -> Char = "%char_from_int"
+pub fn Char::from_int_unchecked(val : Int) -> Char = "%char_from_int"
 
 pub fn Char::op_equal(self : Char, other : Char) -> Bool = "%char_eq"
 

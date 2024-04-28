@@ -28,9 +28,9 @@ test "to_string" {
 pub fn debug_write(self : Char, buf : Buffer) -> Unit {
   fn to_hex_digit(i : Int) -> Char {
     if i < 10 {
-      Char::from_int('0'.to_int() + i)
+      Char::from_int_unchecked('0'.to_int() + i)
     } else {
-      Char::from_int('a'.to_int() + (i - 10))
+      Char::from_int_unchecked('a'.to_int() + (i - 10))
     }
   }
 
@@ -74,7 +74,7 @@ test "debug_write" {
   @assertion.assert_eq(repr('\r'), "'\\r'")?
   @assertion.assert_eq(repr('\b'), "'\\b'")?
   @assertion.assert_eq(repr('\t'), "'\\t'")?
-  @assertion.assert_eq(repr(Char::from_int(0)), "'\\x00'")?
+  @assertion.assert_eq(repr(Char::from_int_unchecked(0)), "'\\x00'")?
 }
 
 pub fn hash(self : Char) -> Int {
